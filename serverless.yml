@@ -1,0 +1,36 @@
+service: sandbox-nodejs-express
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: src/app.handler
+    events:
+      - httpApi: '*'
+
+
+
+
+
+package:
+  patterns:
+    - '!coverage/**'
+    - '!node_modules/**/aws-sdk/**'
+    - '!node_modules/**/@types/**'
+    - '!node_modules/**/coverage/**'
+    - '!node_modules/**/test/**'
+    - '!node_modules/**/*.ts'
+    - '!node_modules/**/*.md'
+    - '!README.md'
+    - '!node_modules/**/*.map'
+    - '!node_modules/**/package-lock.json'
+    - '!**/package-lock.json'
+
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
